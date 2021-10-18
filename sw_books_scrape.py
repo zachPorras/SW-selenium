@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
 
 
 class BookDetails:
@@ -26,8 +25,8 @@ class BookDetails:
         self.options.add_argument('--no-sandbox')
         self.driver = webdriver.Chrome(service=service, options=self.options)
 
-    def book_test(self):
-        return self.book
+    # def book_test(self):
+    #     return self.book
 
     def get_book(self):
         driver = self.driver
@@ -40,9 +39,6 @@ class BookDetails:
         search_1.send_keys(f"{self.book} complete book details")
         search_1.send_keys(Keys.RETURN)
 
-        # slight pause for html to load
-        # driver.implicitly_wait(0.5)
-
         # access first search result
         search_2 = driver.find_element(By.CLASS_NAME, 'link')
 
@@ -54,25 +50,48 @@ class BookDetails:
         self.get_book()
         driver = self.driver
 
-        # locates review score
+        # locates book score
         search = driver.find_element(By.CLASS_NAME, 'review-score-prof.header')
         score = driver.execute_script("return arguments[0].innerHTML;", search)
-        driver.quit()
-        return f'The Youtini Book Score for "{self.book}" is ' + score
-
+        search = driver.find_element(By.CLASS_NAME, 'text-block-149')
+        score_text = driver.execute_script("return arguments[0].innerHTML;", search)
+        # driver.quit()
+        return f'\nYoutini Book Score for "{self.book}": ' + score + " - " + score_text
     
     def book_verdict(self):
         self.get_book()
         driver = self.driver
 
-        # locates preview
+        # locates verdict
         search = driver.find_element(By.CLASS_NAME, 'verdict-prof-header')
         verdict = driver.execute_script("return arguments[0].innerHTML;", search)
-        driver.quit()
-        return f'Preview: ' + verdict
+        # driver.quit()
+        return f'\nPreview: ' + verdict
 
+    def book_summary(self):
+        self.get_book()
+        driver = self.driver
+
+        # locates publisher's summary p elements
+        search = driver.find_elements(By.XPATH, '//h2[@id="Publisher-Summary"]/following::div[1]/child::p')
+        print("\nPublisher Summary:")
         
+        # append all elements found to list
+        summary_list = [element.text for element in search]
+
+        driver.quit()
+        return summary_list
+    
+    def book_all_details(self):
+        print(self.book_score())
+        print(self.book_verdict())
+        for p in my_deets.book_summary():
+            print(f'\n{p}')
+
+
+# testing
 chosen_book = "Path of Destruction"
 my_deets = BookDetails(chosen_book)
-print(my_deets.book_score())
-# print(my_deets.book_verdict())
+
+my_deets.book_all_details()
+
