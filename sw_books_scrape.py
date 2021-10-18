@@ -5,6 +5,24 @@ from selenium.webdriver.common.by import By
 
 
 class BookDetails:
+    
+    """
+    This class allows user to retrieve book details from Youtini.com website,
+    via selenium web scraping.
+
+    Attributes:
+        book (str): Book title
+    
+    Methods:
+        book_all_details(): Calls all methods to retrieve all book details
+        get_book(): Instantiates webdriver & initial book search to find book page
+        book_score(): Retrieves Youtini Book Score, graded on a scale from 0-10.0, 
+            along with 1-word score category.
+        book_verdict(): Retrieves a brief single sentence description.
+        book_summary(): Retrieves Publisher Summary.
+
+    """
+
     def __init__(self, book):
         self.book = book
         service = Service(r"C:\Users\porra\operator\misc\installs\chromedriver.exe")
