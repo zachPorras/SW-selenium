@@ -6,4 +6,5 @@ This will ultimately be folded into my Mos Eisley web application to create a mo
 so that various book details can be presented to the user automatically.
 
 Current functionality includes:
-- Youtini book score
+- Youtini Book Score
+- Book Verdict
