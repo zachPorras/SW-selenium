@@ -5,13 +5,12 @@ from selenium.webdriver.common.by import By
 
 
 class BookDetails:
-    
     """
-    This class allows user to retrieve book details from Youtini.com website,
-    via selenium web scraping.
+    This class allows user to retrieve Star Wars book details 
+    from Youtini.com website, via selenium web scraping tool.
 
     Attributes:
-        book (str): Book title
+        book (str): Star Wars book title
     
     Methods:
         book_all_details(): Calls all methods to retrieve all book details
@@ -22,7 +21,6 @@ class BookDetails:
         book_summary(): Retrieves Publisher Summary.
 
     """
-
     def __init__(self, book):
         self.book = book
         service = Service(r"C:\Users\porra\operator\misc\installs\chromedriver.exe")
@@ -84,7 +82,7 @@ class BookDetails:
         search = driver.find_element(By.CLASS_NAME, 'verdict-prof-header')
         verdict = driver.execute_script("return arguments[0].innerHTML;", search)
         # driver.quit()
-        return f'\nPreview: ' + verdict
+        return f'\nVerdict: ' + verdict
 
     def book_summary(self):
         self.get_book()
@@ -108,7 +106,7 @@ class BookDetails:
 
 
 # testing
-chosen_book = "Path of Destruction"
+chosen_book = "Lost Stars"
 my_deets = BookDetails(chosen_book)
 
 my_deets.book_all_details()
