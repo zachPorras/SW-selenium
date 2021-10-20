@@ -12,15 +12,17 @@ Current functionality includes:
 - Publisher Summary
 - Book Cover Image
 
+There is an additional feature that will scrape character data from Fandom.Wookiepedia, but this is not yet functionable. These files include:
+- sw_char_scrape.py
+- test_char_scrape.py
 
-All functionality is housed in the BookDetails class. 
+All book functionality is housed in the BookDetails class. 
 
-Although there are a handful of methods within this class, 
-calling the book_all_details method will trigger all individual methods in order to return all of the data listed above.
+Calling the book_all_details method will sequentially trigger all individual methods in order to return all of the data listed above.
 
-Individual methods can be called as needed for the specific needs of an application and for further testing during future changes & upgrades.
+Individual methods can be called as needed for the specific needs of a parent application and for further testing during future changes & upgrades.
 
-Testing can be conducted in test_books_scrape.py
+Testing can be conducted in test_XXXXX_scrape.py
 
 
 
