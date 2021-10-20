@@ -26,6 +26,8 @@ class BookDetails:
 
         book_summary(): Retrieves Publisher Summary.
 
+        book_img(): Retrieves url to book cover image.
+
     """
     def __init__(self, book):
         self.book = book
@@ -111,14 +113,23 @@ class BookDetails:
         return summary_list
 
     def book_img(self):
-        self.get_book()
-    
+        # self.get_book()
+        driver = self.driver
+
+        # locates img
+        search = driver.find_element(By.XPATH, '//img[@class="image-84"]')
+        book_img = search.get_attribute("src")
+
+        # driver.quit()
+        return f'\n{book_img}'
+
     def book_all_details(self):
         self.get_book()
         print(f'"{self.book}"')
         print(self.book_author())
         print(self.book_score())
         print(self.book_verdict())
+        print(self.book_img())
         for p in my_deets.book_summary():
             print(f'\n{p}')
         self.driver.quit()
@@ -126,7 +137,7 @@ class BookDetails:
 
 
 # testing
-chosen_book = "Rule of Two"
+chosen_book = "Lost Stars"
 my_deets = BookDetails(chosen_book)
 
 my_deets.book_all_details()

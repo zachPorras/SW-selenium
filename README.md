@@ -10,6 +10,7 @@ Current functionality includes:
 - Youtini Book Score
 - Book Verdict
 - Publisher Summary **
+- Book Cover Image
 
 
 All functionality is housed in the BookDetails class. 
