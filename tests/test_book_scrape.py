@@ -1,4 +1,4 @@
-from sw_scrape import BookDetails
+from ..scrapers.sw_book_scrape import BookDetails
 
 
 # Book testing

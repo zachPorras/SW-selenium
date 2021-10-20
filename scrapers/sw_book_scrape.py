@@ -1,51 +1,7 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from sw_scrape_driver import driver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-
-# global webdriver options
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
-options = webdriver.ChromeOptions()
-options.headless = True
-options.add_argument(f'user-agent={user_agent}')
-options.add_argument("--window-size=1920,1080")
-options.add_argument('--ignore-certificate-errors')
-options.add_argument('--allow-running-insecure-content')
-options.add_argument("--disable-extensions")
-options.add_argument("--proxy-server='direct://'")
-options.add_argument("--proxy-bypass-list=*")
-options.add_argument("--start-maximized")
-options.add_argument('--disable-gpu')
-options.add_argument('--disable-dev-shm-usage')
-options.add_argument('--no-sandbox')
-service = Service(r"C:\Users\porra\operator\misc\installs\chromedriver.exe")
-driver = webdriver.Chrome(service=service, options=options)
-
-
-class CharacterDetails:
-    def __init__(self, character):
-        self.character = character
-
-    def get_character(self):
-        # access Youtini search page
-        driver.get("https://starwars.fandom.com/wiki/Special:Search?query=&scope=internal&navigationSearch=true")
-
-        # search for book using search form
-        search_1 = driver.find_element(By.ID, 'search')
-        search_1.send_keys(f"{self.book} complete book details")
-        search_1.send_keys(Keys.RETURN)
-
-        # access first search result (first instance of .link)
-        search_2 = driver.find_element(By.CLASS_NAME, 'link')
-
-        # route to href attribute i.e. book page
-        book_href = search_2.get_attribute("href")
-        driver.get(f'{book_href}')
-        # driver.quit()
-
-    def character_img(self):
-        pass
 
 
 class BookDetails:
