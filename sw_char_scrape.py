@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from sw_book_scrape import driver
+from sw_scrape_driver import driver
 
 
 class CharacterDetails:
