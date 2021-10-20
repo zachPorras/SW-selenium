@@ -29,11 +29,9 @@ class BookDetails:
 
         book_img(): Retrieves url to book cover image.
 
-        **All methods have the driver.quit() & get_book() methods 
-            commented out. This is for testing individual methods, 
-            since webdriver requires .quit() to stop running.
-
-
+        **All methods have the driver.quit() method commented out.
+            This is for testing individual methods, since
+            webdriver requires .quit() to stop running.
     """
     def __init__(self, book):
         self.book = book
