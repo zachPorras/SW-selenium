@@ -66,18 +66,16 @@ class BookDetails:
         driver.get(f'{book_href}')
     
     def book_author(self):
-        self.get_book()
         driver = self.driver
 
         # locates author
         search = driver.find_element(By.XPATH, '//div[@class="author-prof"]/div[2]')
         author = search.text
-        
+
         # driver.quit()
         return f'\nAuthor: ' + author
 
     def book_score(self):
-        self.get_book()
         driver = self.driver
 
         # locates book score
@@ -87,10 +85,9 @@ class BookDetails:
         score_text = driver.execute_script("return arguments[0].innerHTML;", search)
 
         # driver.quit()
-        return f'\nYoutini Book Score for "{self.book}": ' + score + " - " + score_text
+        return f'\nYoutini Book Score: ' + score + " - " + score_text
     
     def book_verdict(self):
-        self.get_book()
         driver = self.driver
 
         # locates verdict
@@ -101,7 +98,6 @@ class BookDetails:
         return f'\nVerdict: ' + verdict
 
     def book_summary(self):
-        self.get_book()
         driver = self.driver
 
         # locates publisher's summary p elements
@@ -113,8 +109,13 @@ class BookDetails:
 
         # driver.quit()
         return summary_list
+
+    def book_img(self):
+        self.get_book()
     
     def book_all_details(self):
+        self.get_book()
+        print(f'"{self.book}"')
         print(self.book_author())
         print(self.book_score())
         print(self.book_verdict())
@@ -125,7 +126,7 @@ class BookDetails:
 
 
 # testing
-chosen_book = "Dynasty of Evil"
+chosen_book = "Rule of Two"
 my_deets = BookDetails(chosen_book)
 
 my_deets.book_all_details()
