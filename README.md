@@ -6,6 +6,7 @@ This will ultimately be folded into my Mos Eisley web application to create a mo
 so that various book details can be presented to the user automatically.
 
 Current functionality includes:
+- Book Author
 - Youtini Book Score
 - Book Verdict
 - Publisher Summary **
@@ -20,3 +21,7 @@ Individual methods can be called as needed for the specific needs of an applicat
 
 
 ** Currently, some book pages have slightly different formatting which inhibits consistent element traversing. This functionality is still being worked on but is largely compatible with most book pages on Youtini.
+
+
+
+p.s. this is useful - https://devhints.io/xpath

@@ -14,10 +14,16 @@ class BookDetails:
     
     Methods:
         book_all_details(): Calls all methods to retrieve all book details
+
         get_book(): Instantiates webdriver & initial book search to find book page
+
+        book_author(): Retrieves book author.
+
         book_score(): Retrieves Youtini Book Score, graded on a scale from 0-10.0, 
             along with 1-word score category.
+
         book_verdict(): Retrieves a brief single sentence description.
+
         book_summary(): Retrieves Publisher Summary.
 
     """
@@ -41,9 +47,6 @@ class BookDetails:
         self.options.add_argument('--no-sandbox')
         self.driver = webdriver.Chrome(service=service, options=self.options)
 
-    # def book_test(self):
-    #     return self.book
-
     def get_book(self):
         driver = self.driver
 
@@ -55,12 +58,23 @@ class BookDetails:
         search_1.send_keys(f"{self.book} complete book details")
         search_1.send_keys(Keys.RETURN)
 
-        # access first search result
+        # access first search result (first instance of .link)
         search_2 = driver.find_element(By.CLASS_NAME, 'link')
 
         # route to href attribute i.e. book page
         book_href = search_2.get_attribute("href")
         driver.get(f'{book_href}')
+    
+    def book_author(self):
+        self.get_book()
+        driver = self.driver
+
+        # locates author
+        search = driver.find_element(By.XPATH, '//div[@class="author-prof"]/div[2]')
+        author = search.text
+        
+        # driver.quit()
+        return f'\nAuthor: ' + author
 
     def book_score(self):
         self.get_book()
@@ -71,6 +85,7 @@ class BookDetails:
         score = driver.execute_script("return arguments[0].innerHTML;", search)
         search = driver.find_element(By.CLASS_NAME, 'text-block-149')
         score_text = driver.execute_script("return arguments[0].innerHTML;", search)
+
         # driver.quit()
         return f'\nYoutini Book Score for "{self.book}": ' + score + " - " + score_text
     
@@ -80,7 +95,8 @@ class BookDetails:
 
         # locates verdict
         search = driver.find_element(By.CLASS_NAME, 'verdict-prof-header')
-        verdict = driver.execute_script("return arguments[0].innerHTML;", search)
+        verdict = search.text
+
         # driver.quit()
         return f'\nVerdict: ' + verdict
 
@@ -95,19 +111,23 @@ class BookDetails:
         # append all elements found to list
         summary_list = [element.text for element in search]
 
-        driver.quit()
+        # driver.quit()
         return summary_list
     
     def book_all_details(self):
+        print(self.book_author())
         print(self.book_score())
         print(self.book_verdict())
         for p in my_deets.book_summary():
             print(f'\n{p}')
+        self.driver.quit()
+
 
 
 # testing
-chosen_book = "Lost Stars"
+chosen_book = "Dynasty of Evil"
 my_deets = BookDetails(chosen_book)
 
 my_deets.book_all_details()
+
 
