@@ -75,27 +75,27 @@ class BookDetails:
 
     def book_summary(self):
         # Youtini Publisher Summaries are constructed in two ways within HTML:
-        # scenario 1 has summary text within p elements, nested within div
-        # scenario 2 has summary text directly within div
-        
+            # scenario 1 has summary text within p elements that are children of a div
+            # scenario 2 has summary text directly within div element itself
+
+        print("\nPublisher Summary:")
+
         # scenario 1: locates publisher's summary p elements
         search = driver.find_elements(By.XPATH, '//h2[@id="Publisher-Summary"]/following::div[1]/child::p')
-        
-        # scenario 2: locate publisher's summary directly within div
-        search_2 = driver.find_element(By.XPATH, '//h2[@id="Publisher-Summary"]/following::div')
-        summary_2 = driver.execute_script("return arguments[0].innerHTML;", search_2)
-        
-        print("\nPublisher Summary:")
-        
-        # append all elements found to list
-        summary_list = [element.text for element in search]
+        if search:
+            summary_list = [element.text for element in search]
+            summary_1 = ""
+            for text in summary_list:
+                summary_1 += text + '\n\n'
+            return summary_1
 
-        p_string = ""
-        for p in summary_list:
-            f'{p_string} += {p}'
+        # scenario 2: locate publisher's summary directly within div
+        else:    
+            search_2 = driver.find_element(By.XPATH, '//h2[@id="Publisher-Summary"]/following::div')
+            summary_2 = driver.execute_script("return arguments[0].innerHTML;", search_2)
+            return summary_2   
 
         # driver.quit()
-        return summary_2 + p_string
 
     def book_img(self):
         # locates img
