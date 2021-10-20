@@ -102,5 +102,3 @@ class BookDetails:
         for p in self.book_summary():
             print(f'\n{p}')
         driver.quit()
-
-        

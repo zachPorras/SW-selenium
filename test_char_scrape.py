@@ -1,4 +1,4 @@
-from ..scrapers.sw_char_scrape import CharacterDetails
+from sw_char_scrape import CharacterDetails
 
 
 
