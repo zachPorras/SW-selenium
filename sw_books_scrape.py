@@ -130,16 +130,8 @@ class BookDetails:
         print(self.book_score())
         print(self.book_verdict())
         print(self.book_img())
-        for p in my_deets.book_summary():
+        for p in self.book_summary():
             print(f'\n{p}')
         self.driver.quit()
 
-
-
-# testing
-chosen_book = "Lost Stars"
-my_deets = BookDetails(chosen_book)
-
-my_deets.book_all_details()
-
-
+        
