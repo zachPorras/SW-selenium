@@ -12,21 +12,27 @@ class BookDetails:
     Attributes:
         book (str): Star Wars book title
     
-    Methods:
+    Methods**:
         book_all_details(): Calls all methods to retrieve all book details
 
-        get_book(): Instantiates webdriver & initial book search to find book page
+        get_book(): Instantiates webdriver & initial book search to find 
+            book page
 
         book_author(): Retrieves book author.
 
-        book_score(): Retrieves Youtini Book Score, graded on a scale from 0-10.0, 
-            along with 1-word score category.
+        book_score(): Retrieves Youtini Book Score, graded on a scale 
+        from 0-10.0, along with 1-word score category.
 
         book_verdict(): Retrieves a brief single sentence description.
 
         book_summary(): Retrieves Publisher Summary.
 
         book_img(): Retrieves url to book cover image.
+
+        **All methods have the driver.quit() & get_book() methods 
+            commented out. This is for testing individual methods, 
+            since webdriver requires .quit() to stop running.
+
 
     """
     def __init__(self, book):
@@ -81,7 +87,7 @@ class BookDetails:
         print("\nPublisher Summary:")
 
         # scenario 1: locates publisher's summary p elements
-        search = driver.find_elements(By.XPATH, '//h2[@id="Publisher-Summary"]/following::div[1]/child::p')
+        search = driver.find_elements(By.XPATH, '//h2[@id="Publisher-Summary"]/following::div[1]/p')
         if search:
             summary_list = [element.text for element in search]
             summary_1 = ""
